@@ -1,5 +1,13 @@
 # :author: Maxime VINCENT
 
+#=
+$ julia
+julia> import Pkg
+julia> Pkg.add("Cbc")
+julia> Pkg.add("JuMP")
+$ julia planning.jl 
+=#
+
 using Cbc, JuMP
 
 # TODO: Encapsuler dans une fonction

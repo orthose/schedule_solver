@@ -21,16 +21,41 @@ précisément binaires.
 
 # Implémentation
 Le programme est prototypé en Julia à l'aide des librairies `Cbc` et `JuMP`.
-Une autre version en Python sera également réalisée à l'aide de la librairie `PuLP`
-et disposera d'une interface graphique client léger utilisant `Flask`.
+Une autre version en Python est également réalisée à l'aide de la librairie `PuLP`
+et dispose d'une interface graphique client léger utilisant `Flask`.
 
-# Installation & Exécution
-## Julia
+# Mise en production
+## Environnement virtuel
 ```shell
-$ cd jl/
-$ julia
-julia> import Pkg
-julia> Pkg.add("Cbc")
-julia> Pkg.add("JuMP")
-$ julia planning.jl
+$ python3 -m venv venv
+$ source venv/bin/activate
+$ pip install -r requirements.txt
+```
+
+## Exécution
+TODO
+
+# Contribuer
+## Environnement virtuel
+```shell
+$ python3 -m venv venv
+$ source venv/bin/activate
+$ pip install pip-tools
+$ pip-sync requirements*.txt
+```
+
+## Formatage du code
+```shell
+ruff format swim_6h
+# Qualité du code
+ruff swim_6h
+```
+
+## Compilation des dépendances
+En cas de modification des fichiers `requirements*.in`.
+```shell
+# Dépendances de production
+pip-compile requirements.in
+# Dépendances de développement
+pip-compile requirements-dev.in
 ```
