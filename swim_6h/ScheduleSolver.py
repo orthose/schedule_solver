@@ -13,8 +13,6 @@ class ScheduleSolver(LpProblem):
 
     def __init__(
         self,
-        n_swims: int,
-        n_slots: int,
         free_swims_slots: list[tuple[int, int]],
         max_slots_per_swim: int | list[int] = 1,
         max_swims_per_slot: int | list[int] = 1,
@@ -23,10 +21,6 @@ class ScheduleSolver(LpProblem):
         """
         Instancie un nouveau solveur à partir des disponibilités des nageurs
 
-        :param n_swims:
-            Nombre de nageurs entier positif non-nul
-        :param n_slots:
-            Nombre de créneaux entier positif non-nul
         :param free_swims_slots:
             Liste de tuples des disponibilités de chaque nageur de la forme [(i,j),...]
             Le nombre d'éléments correspond au nombre de variables du modèle
@@ -47,16 +41,20 @@ class ScheduleSolver(LpProblem):
             Si None pas de contrainte appliquée
         """
         # Vérification et prétraitement des entrées
-        assert 0 <= n_swims and 0 <= n_slots
-        r_swims = range(n_swims)
-        r_slots = range(n_slots)
-        # Nombre maximum de variables
-        max_vars = n_swims * n_slots
+        assert 0 < len(free_swims_slots)
         # Suppression des dupliqués et amélioration de la recherche
         free_swims_slots = set(free_swims_slots)
-        assert len(free_swims_slots) <= max_vars
+        n_swims = 1  # Nombre de nageurs
+        n_slots = 1  # Nombre de créneaux
         for i, j in free_swims_slots:
-            assert 0 <= i < n_swims and 0 <= j < n_slots
+            assert 0 <= i and 0 <= j
+            n_swims = max(n_swims, i + 1)
+            n_slots = max(n_slots, j + 1)
+        # Nombre maximum de variables
+        max_vars = n_swims * n_slots
+        assert len(free_swims_slots) <= max_vars
+        r_swims = range(n_swims)
+        r_slots = range(n_slots)
 
         if isinstance(max_slots_per_swim, int):
             max_slots_per_swim = [max_slots_per_swim] * n_swims
