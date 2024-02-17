@@ -44,11 +44,17 @@ $ pip install pip-tools
 $ pip-sync requirements*.txt
 ```
 
+## Exécution
+```shell
+$ cd schedule_solver
+$ flask run --debug
+```
+
 ## Formatage du code
 ```shell
-ruff format swim_6h
+ruff format schedule_solver
 # Qualité du code
-ruff swim_6h
+ruff schedule_solver
 ```
 
 ## Compilation des dépendances
