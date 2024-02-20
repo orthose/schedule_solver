@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Simple Schedule Solver</title>
+    <title>Schedule Solver</title>
 </head>
 <body>
    <h1>Les 6 heures de nage</h1>
@@ -21,5 +21,25 @@
     nager au moins 2 fois, mais ils risquent d'être moins performants du fait de la 
     fatigue. Si on a plus de 12 participants, il faudra faire des choix et en éliminer 
     (les éliminés pourront éventuellement intégrer une autre équipe...).</p>
+
+    <form method="post">
+        <table>
+        <tr>
+            <th></th>
+            {% for slot in slots_hours %}
+                <th style="writing-mode: vertical-lr;">{{ slot }}</th>
+            {% endfor %}
+        </tr>
+        {% for i in range(12) %}
+            <tr><th style="text-align: left;">{{ 'Nageur {}'.format(i+1) }}</th>
+            {% for j in range(12) %}
+                <td><input name="{{ 'slot_{}_{}'.format(i, j) }}" type="checkbox" 
+                    {{ "checked" if (i, j) in affected_slots }}></td>
+            {% endfor %}</tr>
+        {% endfor %}
+        </table><br>
+        <input type="submit" value="Envoyer">
+        <p>Objectif: {{ objective_value }}</p>
+    </form>
 </body>
 </html>

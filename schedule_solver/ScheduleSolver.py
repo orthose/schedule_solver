@@ -75,6 +75,7 @@ class ScheduleSolver(LpProblem):
 
         # Si x[i,j] == 1 alors le nageur i est inscrit au créneau j
         x = LpVariable.dicts("x", free_swims_slots, cat=LpBinary)
+        self.variables_swim_slot = x
 
         # Fonction objectif : on cherche à maximiser le nombre de créneaux alloués
         self += (
