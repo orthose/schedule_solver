@@ -1,4 +1,5 @@
 # Les 6 heures de nage
+
 Les « 6 heures de nage » sont une compétition amicale de nage avec palmes 
 se déroulant à la piscine d'Étampes. Elle est découpée en 12 relais de 30 minutes 
 chacun. Plusieurs équipes s'affrontent afin de réaliser la distance cumulée la 
@@ -15,19 +16,23 @@ fatigue. Si on a plus de 12 participants, il faudra faire des choix et en élimi
 (les éliminés pourront éventuellement intégrer une autre équipe...).
 
 # Modélisation du problème
+
 Pour résoudre ce problème automatiquement on se propose de le modéliser à l'aide
 d'un programme d'optimisation sous contraintes en variables entières et plus
 précisément binaires.
 
 # Implémentation
+
 Le programme est prototypé en Julia à l'aide des librairies `Cbc` et `JuMP`.
 Une autre version en Python est également réalisée à l'aide de la librairie `PuLP`
 et dispose d'une interface graphique client léger utilisant `Flask`.
 
 # Mise en production
+
 ## Environnement virtuel
+
 ```shell
-$ python3 -m venv venv
+$ python3 -m venv .venv
 $ source venv/bin/activate
 $ pip install -r requirements.txt
 ```
@@ -36,21 +41,27 @@ $ pip install -r requirements.txt
 TODO
 
 # Contribuer
+
 ## Environnement virtuel
+
 ```shell
-$ python3 -m venv venv
+$ python3 -m venv .venv
 $ source venv/bin/activate
 $ pip install pip-tools
 $ pip-sync requirements*.txt
 ```
 
 ## Exécution
+
 ```shell
 $ cd schedule_solver
 $ flask run --debug
+# Pour commencer à 13h30
+$ START_AT_30=1 STOP_HOUR=20 flask run --debug
 ```
 
 ## Formatage du code
+
 ```shell
 ruff format schedule_solver
 # Qualité du code
@@ -58,6 +69,7 @@ ruff schedule_solver
 ```
 
 ## Compilation des dépendances
+
 En cas de modification des fichiers `requirements*.in`.
 ```shell
 # Dépendances de production
